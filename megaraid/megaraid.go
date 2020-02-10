@@ -383,10 +383,13 @@ func OpenMegasasIoctl(host uint16, diskNum uint8) error {
 	fmt.Printf("Firmware Revision: %s\n", ident_buf.FirmwareRevision())
 	fmt.Printf("Model Number: %s\n", ident_buf.ModelNumber())
 
-	db, err := drivedb.OpenDriveDb("drivedb.yaml")
-	if err != nil {
-		return err
-	}
+	// db, err := drivedb.OpenDriveDb("drivedb.yaml")
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return err
+	// }
+
+	db := drivedb.DB
 
 	thisDrive := db.LookupDrive(ident_buf.ModelNumber())
 	fmt.Printf("Drive DB contains %d entries. Using model: %s\n", len(db.Drives), thisDrive.Family)
